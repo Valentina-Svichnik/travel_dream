@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="https://bootswatch.com/5/minty/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-main">
+<p>Подсказка: <br> все пароли - 12345</p>
+<div class="container d-flex flex-column align-items-center mt-5">
+    <h1 class="mt-5 text-center">Вход в систему</h1>
+    <div class="w-75 d-flex justify-content-center">          
+        <form id="add_form" method="post" class="mt-4 d-flex flex-column w-75 border border-secondary rounded p-3">
+            {% csrf_token %}
+            {% if form.non_field_errors %}
+            <div class="form-group row">
+                <div class="alert alert-dismissible alert-danger">{{ form.non_field_errors }}</div>
+            </div>
+            {% endif %}
+
+            {% for f in form %}
+            <div class="form-group row">
+                <label for="{{ f.id_for_label }}" class="col-sm-4 col-form-label">{{ f.label }}</label>
+                <div class="col-sm-8">
+                    {{ f }}
+                </div>
+            </div>
+            {% endfor %}
+            <button form="add_form" type="submit" class="btn bg-gradient w-50 align-self-center mt-3">Войти</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

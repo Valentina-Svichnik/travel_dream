@@ -1,0 +1,56 @@
+.bg-main{
+    background-color: #CDE9EE;
+}
+
+.bg-edit{
+    background-color: #CBE5EB;
+}
+
+.bg-gradient{
+    background: linear-gradient(45deg, #ACB6E5,#86FDE8) !important;
+}
+.bg-header{
+    background-color: #89A0A5;
+}
+
+input {
+    width: 100% !important;
+}
+
+.border-secondary {
+    border-color: #9E9E9E!important;
+}
+
+.w-23{
+    width: 23%;
+}
+
+.block-size{
+    width: 23%;
+}
+
+.form-size{
+    width: 45%;
+}
+
+@media (max-width: 970px){
+    .block-size{
+        width: 30%;
+    }
+}
+
+@media (max-width: 770px){
+    .block-size{
+        width: 45%;
+    }
+}
+
+@media (max-width: 430px){
+    .block-size{
+        width: 100%;
+    }
+
+    .form-size{
+        width: 100%;
+    }
+}

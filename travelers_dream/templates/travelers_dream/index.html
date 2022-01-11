@@ -1,0 +1,41 @@
+
+{% extends 'travelers_dream/base.html' %}
+
+{% block title %}
+    Главная
+{% endblock %}
+{% block content_admin %}
+    {% if request.user.is_superuser %}
+    <div class="d-flex flex-column flex-md-row">
+        <h1 class="mb-4 bg-main col-md-6 col-xl-8">Сотрудники</h1>
+        <form method="get" action="" class="d-flex row col-md-6 col-xl-4 mt-2">
+            <div class="col-8">
+                <input type="text" placeholder="Поиск сотрудников" name="search" required
+                               class="mb-3 form-control">
+            </div>
+            <div class="col-4">
+                <button type="submit" class="btn bg-gradient">Искать</button>
+            </div>
+        </form>
+    </div>
+        <div class="d-flex flex-wrap">
+        {% if employees %}
+            {% for el in employees %}
+                <a href="/employee/{{ el.id }}" class="text-decoration-none block-size m-2">
+                    <div class="alert alert-dismissible alert-light">
+                        <h5>{{ el.fio }}</h5>
+                    <p>
+                        {{ el.position }}<br>
+                        Логин: {{ el.user.username }}
+                    </p>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <p>Нет ни одного сотрудника</p>
+        {% endif %}
+        </div>
+    {% endif %}
+    
+    <a class="btn bg-gradient mb-2" href="{% url 'createEmployee' %}">Добавить сотрудника</a>
+{% endblock %}
