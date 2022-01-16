@@ -11,7 +11,7 @@ class Agreement(models.Model):
     number_participants = models.IntegerField()
     date_start = models.DateField()
     date_end = models.DateField()
-    # cities = models.TextField(db_collation='utf8mb4_bin')
+    cities = models.TextField()
 
     class Meta:
         managed = False
@@ -133,7 +133,7 @@ class Contract(models.Model):
     client_id = models.IntegerField()
     date_start = models.DateField()
     date_end = models.DateField()
-    # participants = models.TextField(db_collation='utf8mb4_bin')
+    participants = models.TextField()
     sum = models.IntegerField()
     currency = models.ForeignKey('Currency', models.DO_NOTHING, db_column='currency')
 

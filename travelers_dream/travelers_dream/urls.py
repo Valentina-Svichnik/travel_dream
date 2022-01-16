@@ -12,5 +12,11 @@ urlpatterns = [
     path('employee/<int:id>', views.employee, name="employee"),
     path('create-client', views.create_client, name="createClient"),
     path('client/<int:id>', views.client, name="client"),
+    path('agreements', views.agreements, name="agreements"),
+    path('agreement/<int:id>', views.agreement, name="agreement"),
+    path('create-agreement', views.create_agreement, name="createAgreement"),
+    path('contractCreate', views.contractCreate, name="contractCreate"),
+    path('success', views.success, name="success"),
+    path('pays', views.pays, name="pays"),
     # path('accounts/', include('django.contrib.auth.urls')),
 ]

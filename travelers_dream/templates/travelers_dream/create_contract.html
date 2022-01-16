@@ -1,0 +1,61 @@
+{% extends 'travelers_dream/base.html' %}
+
+{% block title %}
+    Добавление договора
+{% endblock %}
+
+{% block content_admin %}
+{% if request.user.is_superuser %}
+
+<div class="d-flex flex-column-reverse flex-md-row justify-content-between">
+    <h1 class="mb-4">Добавление договора</h1>
+    <div class="mb-3 mb-md-0"><a class="btn bg-gradient btn-sm" href="{% url 'agreements' %}">Назад</a></div>
+</div>
+
+    {% if error != '' %}
+    <div class="alert alert-dismissible alert-danger">
+        <strong>{{ error }}</strong>
+        {{ form.non_form_errors }}
+    </div>
+    {% endif %}
+    
+    <form method="post" action="" class="d-flex flex-wrap">
+        {% csrf_token %}
+        <h5 class="form-label w-100">Номер: {{ agreement.id }}</h5>
+        <div class="form-size m-2">
+            <label for="date" class="form-label">Дата создания</label>
+            <input type="date" name="date" id="date" class="mb-3 form-control" value="{{ agreement.date|date:"Y-m-d"  }}">
+        </div>
+        <div class="form-size m-2">
+            <label for="agreement_id" class="form-label">Соглашение</label>
+            <input type="text" name="agreement_id" id="agreement_id" class="mb-3 form-control" value="{{ agreement.id }}">
+        </div> 
+         <div class="form-size m-2">
+            <label for="organization" class="form-label">Организация</label>
+            <input type="text" name="organization" id="organization" class="mb-3 form-control" value="{{ agreement.organization }}">
+        </div> 
+        <div class="form-size m-2">
+            <label for="agent_id" class="form-label">Агент</label>
+            <input type="text" name="agent_id" id="agent_id" class="mb-3 form-control" value="{{ agreement.agent }}">
+        </div>
+        <div class="form-size m-2">
+            <label for="client_id" class="form-label">Клиент</label>
+            <input type="text" name="client_id" id="client_id" class="mb-3 form-control" value="{{ agreement.client }}">
+        </div> 
+        <div class="w-100"> <h5>Даты поездки:</h5> </div>
+            <div class="form-size m-2">
+                <label for="date_start" class="form-label">Начало</label>
+                <input type="date" name="date_start" id="date_start" class="mb-3 form-control" value="{{ agreement.date_start|date:"Y-m-d" }}">
+            </div>
+            <div class="form-size m-2">
+                <label for="date_end" class="form-label">Окончание</label>
+                <input type="date" name="date_end" id="date_end" class="mb-3 form-control" value="{{ agreement.date_end|date:"Y-m-d" }}">
+            </div>
+
+        <div class="w-100"> <h5>Участники поездки: </h5> </div>
+        <input type="text" name="participants" id="participants"  class="mb-3 form-control" value="{{ agreement.participants }}" required> 
+
+        <button type="submit" class="btn bg-gradient mt-3 mb-5">Передать бухгалтеру на оплату</button>
+    </form>
+{% endif %} 
+{% endblock %}

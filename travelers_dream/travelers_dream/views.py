@@ -7,8 +7,8 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 # from .forms import UserRegistrationForm
 
-from .models import Employee, Client, PositionEmployee, Organization, StatusClient, AuthUser
-from .forms import EmployeeCreateForm, ClientCreateForm, UserCreateForm, AuthUserForm
+from .models import Employee, Client, PositionEmployee, Organization, StatusClient, AuthUser, Agreement, Contract
+from .forms import EmployeeCreateForm, ClientCreateForm, AgreementCreateForm, UserCreateForm, AuthUserForm, ContractCreateForm
 
 
 # from django.http import HttpResponse
@@ -27,6 +27,14 @@ def clients(request):
     clients = Client.objects.all()
     return render(request, 'travelers_dream/clients.html', {'clients': clients})
 
+
+def agreements(request):
+    agreements = Agreement.objects.all()
+    return render(request, 'travelers_dream/agreements.html', {'agreements': agreements})
+    
+def pays(request):
+    contract = Contract.objects.all()
+    return render(request, 'travelers_dream/pays.html', {'contract': contract})
 
 def employee(request, id):
     error = ''
@@ -106,6 +114,20 @@ def client(request, id):
     return render(request, 'travelers_dream/client.html', {'client': person, 'statuses': statuses, 'error': error})
 
 
+def agreement(request, id):
+    error = ''
+    agreement = Agreement.objects.get(id=id)
+    if request.method == 'POST':
+        form = AgreementCreateForm(request.POST, instance=agreement)
+        if form.is_valid():
+            form.save()
+            return redirect('agreements')
+        else:
+            error = 'Форма заполнена некорректно'
+    organizations = Organization.objects.all()
+    return render(request, 'travelers_dream/agreement.html', {'agreement': agreement, 'error': error, 'organizations' : organizations})
+
+
 def create_client(request):
     error = ''
     if request.method == 'POST':
@@ -119,6 +141,39 @@ def create_client(request):
     statuses = StatusClient.objects.all()
     return render(request, 'travelers_dream/create_client.html', {'statuses': statuses, 'error': error})
 
+def create_agreement(request):
+    error = ''
+    if request.method == 'POST':
+        form = AgreementCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('contractCreate')
+        else:
+            error = 'Форма заполнена некорректно'
+
+    organizations = Organization.objects.all()
+    agent = Employee.objects.all()
+    client = Client.objects.all()
+    return render(request, 'travelers_dream/create_agreement.html', {'error': error, 'organizations' : organizations, 'agent' : agent, 'client' : client})
+
+
+def contractCreate(request):
+    error = ''
+    if request.method == 'POST':
+        form = ContractCreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('success')
+        else:
+            error = 'Форма заполнена некорректно'
+
+    agreement = Agreement.objects.all().last()
+    contract = Contract.objects.all()
+    return render(request, 'travelers_dream/create_contract.html', {'agreement' : agreement, 'error' : error, 'contract' : contract})
+
+
+def success(request):
+    return render(request, 'travelers_dream/success.html')
 
 class Login(LoginView):
     template_name = "travelers_dream/login.html"

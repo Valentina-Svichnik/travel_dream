@@ -35,7 +35,9 @@
             <p>Нет ни одного сотрудника</p>
         {% endif %}
         </div>
-    {% endif %}
+        <a class="btn bg-gradient mb-2" href="{% url 'createEmployee' %}">Добавить сотрудника</a>
+        {% endif %}
     
-    <a class="btn bg-gradient mb-2" href="{% url 'createEmployee' %}">Добавить сотрудника</a>
+        
+    
 {% endblock %}

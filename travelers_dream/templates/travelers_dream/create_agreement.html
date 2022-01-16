@@ -1,0 +1,78 @@
+{% extends 'travelers_dream/base.html' %}
+
+{% block title %}
+    Добавление соглашения
+{% endblock %}
+
+{% block content_admin %}
+    {% if request.user.is_superuser %}
+        <div class="d-flex flex-column-reverse flex-md-row justify-content-between">
+            <h1 class="mb-4">Добавление соглашения</h1>
+            <div class="mb-3 mb-md-0"><a class="btn bg-gradient btn-sm" href="{% url 'agreements' %}">Назад</a></div>
+        </div>
+
+            {% if error != '' %}
+            <div class="alert alert-dismissible alert-danger">
+                <strong>{{ error }}</strong>
+                {{ form.non_form_errors }}
+            </div>
+            {% endif %}
+            
+            <form method="post" action="" class="d-flex flex-wrap">
+                {% csrf_token %}
+                <div class="form-size m-2">
+                    <label for="date" class="form-label">Дата создания</label>
+                    <input type="date" name="date" id="date" class="mb-3 form-control" placeholder="дд.мм.гггг">
+                </div> 
+                <div class="form-size m-2">
+                    <label for="organization" class="form-label">Организация</label>
+                    <select class="form-select mb-3" id="organization" name="organization">
+                        {% for el in organizations %}
+                                <option> {{ el.id }} </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-size m-2">
+                    <label for="agent" class="form-label">Агент</label>
+                    <select class="form-select mb-3" id="agent" name="agent">
+                        {% for el in agent %}
+                            {% if el.position.name != 'Бухгалтер' or el.position.name != 'Администратор' %}
+                                <option> {{ el.id }} </option>
+                            {% endif %}        
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-size m-2">
+                    <label for="client" class="form-label">Клиент</label>
+                    <select class="form-select mb-3" id="client" name="client">
+                        {% for el in client %}
+                                <option> {{ el.id }} </option>       
+                        {% endfor %}
+                    </select>
+                </div> 
+                <div class="form-size m-2">
+                    <label for="country" class="form-label">Страна посещения</label>
+                    <input type="text" name="country" id="country" class="mb-3 form-control" placeholder="Страна">
+                </div>
+                <div class="form-size m-2">
+                    <label for="number_participants" class="form-label">Количество участников</label>
+                    <input type="text" name="number_participants" id="number_participants"  class="mb-3 form-control" placeholder="Количество участников">
+                </div> 
+                <div class="w-100"> <h5>Даты поездки:</h5> </div>
+                    <div class="form-size m-2">
+                        <label for="date_start" class="form-label">Начало</label>
+                        <input type="date" name="date_start" id="date_start" class="mb-3 form-control" placeholder="дд.мм.гггг">
+                    </div>
+                    <div class="form-size m-2">
+                        <label for="date_end" class="form-label">Окончание</label>
+                        <input type="date" name="date_end" id="date_end" class="mb-3 form-control" placeholder="дд.мм.гггг">
+                    </div>
+
+                <div class="w-100"> <h5>Города посещения: </h5> </div>
+                <input type="text" name="cities" id="cities" required class="mb-3 form-control" placeholder="Добавить">
+
+                <button type="submit" class="btn bg-gradient mt-3 mb-5">Добавить</button>
+                <!-- <a href="/employee/{{ el.id }}" class="text-decoration-none block-size m-2"></a> -->
+            </form>
+   {% endif %} 
+{% endblock %}

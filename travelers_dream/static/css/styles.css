@@ -3,7 +3,7 @@
 }
 
 .bg-edit{
-    background-color: #CBE5EB;
+    background-color: #9E9E9E !important;
 }
 
 .bg-gradient{
@@ -32,6 +32,7 @@ input {
 .form-size{
     width: 45%;
 }
+
 
 @media (max-width: 970px){
     .block-size{
