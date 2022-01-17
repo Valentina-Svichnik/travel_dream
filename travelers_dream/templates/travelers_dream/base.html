@@ -17,7 +17,7 @@
             <a class="me-3 py-2 text-white text-decoration-none" href="{% url 'employees' %}">Сотрудники</a>
             <a class="me-3 py-2 text-white text-decoration-none" href="{% url 'clients' %}">Клиенты</a>
             <a class="me-3 py-2 text-white text-decoration-none" href="{% url 'agreements' %}">Соглашения</a>
-            <a class="me-3 py-2 text-white text-decoration-none" href="#">Договоры</a>
+            <!-- <a class="me-3 py-2 text-white text-decoration-none" href="#">Договоры</a> -->
         {% elif employee_now.position.name != 'Бухгалтер'%}
             <a class="me-3 py-2 text-white text-decoration-none" href="{% url 'clients' %}">Клиенты</a>
             <a class="me-3 py-2 text-white text-decoration-none" href="{% url 'agreements' %}">Соглашения</a>

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content_admin %}
-    {% if employee_now.position.name != 'Бухгалтер' %}
+    {% if employee_now.position.name != 'Бухгалтер' and request.user.is_staff %}
     <div class="d-flex flex-column-reverse flex-md-row justify-content-between">
         <h1 class="mb-4">{{ client.fio }}</h1>
         <div class="mb-3 mb-md-0"><a class="btn bg-gradient btn-sm" href="{% url 'clients' %}">Назад</a></div>

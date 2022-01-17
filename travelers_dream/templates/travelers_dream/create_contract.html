@@ -32,15 +32,15 @@
         </div> 
          <div class="form-size m-2">
             <label for="organization" class="form-label">Организация</label>
-            <input type="text" name="organization" id="organization" class="mb-3 form-control" value="{{ agreement.organization }}">
+            <input type="text" name="organization" id="organization" class="mb-3 form-control" value="{{ agreement.organization.id }}">
         </div> 
         <div class="form-size m-2">
             <label for="agent_id" class="form-label">Агент</label>
-            <input type="text" name="agent_id" id="agent_id" class="mb-3 form-control" value="{{ agreement.agent }}">
+            <input type="text" name="agent_id" id="agent_id" class="mb-3 form-control" value="{{ agreement.agent.id }}">
         </div>
         <div class="form-size m-2">
             <label for="client_id" class="form-label">Клиент</label>
-            <input type="text" name="client_id" id="client_id" class="mb-3 form-control" value="{{ agreement.client }}">
+            <input type="text" name="client_id" id="client_id" class="mb-3 form-control" value="{{ agreement.client.id }}">
         </div> 
         <div class="w-100"> <h5>Даты поездки:</h5> </div>
             <div class="form-size m-2">

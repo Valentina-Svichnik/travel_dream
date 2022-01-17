@@ -28,7 +28,7 @@
                     <label for="organization" class="form-label">Организация</label>
                     <select class="form-select mb-3" id="organization" name="organization">
                         {% for el in organizations %}
-                                <option> {{ el.id }} </option>
+                                <option value="{{ el.id }}"> {{ el.name }} </option>
                         {% endfor %}
                     </select>
                 </div>
@@ -37,7 +37,7 @@
                     <select class="form-select mb-3" id="agent" name="agent">
                         {% for el in agent %}
                             {% if el.position.name != 'Бухгалтер' or el.position.name != 'Администратор' %}
-                                <option> {{ el.id }} </option>
+                                <option value="{{ el.id }}"> {{ el.fio }} </option>
                             {% endif %}        
                         {% endfor %}
                     </select>
@@ -46,7 +46,7 @@
                     <label for="client" class="form-label">Клиент</label>
                     <select class="form-select mb-3" id="client" name="client">
                         {% for el in client %}
-                                <option> {{ el.id }} </option>       
+                            <option  value="{{ el.id }}"> {{ el.fio }} </option>      
                         {% endfor %}
                     </select>
                 </div> 

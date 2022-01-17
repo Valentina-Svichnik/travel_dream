@@ -18,5 +18,5 @@ urlpatterns = [
     path('contractCreate', views.contractCreate, name="contractCreate"),
     path('success', views.success, name="success"),
     path('pays', views.pays, name="pays"),
-    # path('accounts/', include('django.contrib.auth.urls')),
+    path('pay/<int:id>', views.pay, name="pay"),
 ]

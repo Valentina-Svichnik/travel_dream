@@ -1,0 +1,38 @@
+{% extends 'travelers_dream/base.html' %}
+
+{% block title %}
+    Оплата
+{% endblock %}
+{% block content_admin %}
+<div class="d-flex flex-column-reverse flex-md-row justify-content-between">
+    <h1 class="mb-4">Оплата договора №{{ contract.id }}</h1>
+    <div class="mb-3 mb-md-0"><a class="btn bg-gradient btn-sm" href="{% url 'pays' %}">Назад</a></div>
+</div>
+
+    <div class="row">
+        <div class="col-6">
+        {% if error != '' %}
+        <div class="alert alert-dismissible alert-danger">
+            <strong>{{ error }}</strong>
+        </div>
+        {% endif %}
+            <form method="post"  class="d-flex flex-column">
+                {% csrf_token %}
+                <div class="m-2">
+                    <label for="date" class="form-label">Дата</label>
+                    <input type="date" name="date" id="date" class="mb-3 form-control" value="{{ contract.date|date:"Y-m-d" }}">
+                </div> 
+                <div class="m-2">
+                    <label for="organization" class="form-label">Организация</label>
+                    <input type="text" name="organization" id="organization" class="mb-3 form-control" value="{{ contract.organization }}">
+                </div>
+                <div class="m-2">
+                    <label for="sum" class="form-label">Сумма в рублях</label>
+                    <input type="text" name="sum" id="sum" class="mb-3 form-control">
+                </div><br>
+
+                <button type="submit" class="btn bg-gradient mt-3 mb-5 mx-2 w-50">Провести оплату</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

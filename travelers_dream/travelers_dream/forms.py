@@ -21,7 +21,7 @@ class ClientCreateForm(ModelForm):
 class AgreementCreateForm(ModelForm):
     class Meta:
         model = Agreement
-        fields = ['date', 'organization','agent', 'client', 'country',  'number_participants', 'date_start', 'date_end', 'cities']
+        fields = ['date', 'organization','agent', 'client', 'country', 'number_participants', 'date_start', 'date_end', 'cities']
 
 
 class AuthUserForm(AuthenticationForm, ModelForm):
@@ -39,7 +39,11 @@ class UserCreateForm(ModelForm):
 class ContractCreateForm(ModelForm):
     class Meta:
         model = Contract
-        fields = ['date_start', 'date_end', 'participants']
+        fields = ['date', 'agreement_id', 'organization', 'agent_id', 'client_id', 'date_start', 'date_end', 'participants']
 
+class PayCreateForm(ModelForm):
+    class Meta:
+        model = Contract
+        fields = ['sum']
 
 

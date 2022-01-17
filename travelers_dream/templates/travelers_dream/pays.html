@@ -1,69 +1,34 @@
 {% extends 'travelers_dream/base.html' %}
 
 {% block title %}
-    Соглашения
+    Оплаты
 {% endblock %}
 {% block content_admin %}
-<h1>Здесь будет список договоров для оплаты</h1>
-<!-- <div class="d-flex flex-column-reverse flex-md-row justify-content-between">
-    <h1 class="mb-4">Соглашение №{{ agreement.id }}</h1>
-    <div class="mb-3 mb-md-0"><a class="btn bg-gradient btn-sm" href="{% url 'agreements' %}">Назад</a></div>
+<h1 class="mb-4">Список договоров на оплату</h1>
+
+<div class="d-flex flex-wrap">
+{% if contract %}
+    {% for el in contract %}
+            <div class="alert alert-dismissible alert-light d-flex flex-column align-items-center form-size m-2">
+               <div class="row w-100">
+                <div class="col-1">
+                    <h5 class="id-item">{{ el.id }}</h5>
+                </div>
+                <div class="col-11">
+                    <p> Дата создания: {{ el.date }} </p>
+                    <p> Организация: {{ el.organization }}</p>
+                </div>
+               </div>
+                
+                {% if contract.sum %}
+                    <a href="/pay/{{ el.id }}" class="btn bg-edit w-50 mt-3">Провести оплату</a>
+                {% else %}
+                    <a href="#" class="btn btn-success w-50 mt-3">Оплата проведена</a>
+                {% endif %}
+            </div>
+    {% endfor %}
+{% else %}
+    <p>Нет ни одного договора</p>
+{% endif %}
 </div>
-
-    <div class="row">
-        <div class="col-6">
-        {% if error != '' %}
-        <div class="alert alert-dismissible alert-danger">
-            <strong>{{ error }}</strong>
-        </div>
-        {% endif %}
-            <form method="post"  class="d-flex flex-wrap">
-                {% csrf_token %}
-                <div class="form-size m-2">
-                    <label for="date" class="form-label">Дата создания</label>
-                    <input type="date" name="date" id="date" class="mb-3 form-control" value="{{ agreement.date|date:"Y-m-d" }}">
-                </div> 
-                <div class="form-size m-2">
-                    <label for="organization" class="form-label">Организация</label>
-                    <select class="form-select mb-3" id="organization" name="organization">
-                        {% for el in organizations %}
-                                <option value="{{ el.id }}" {% if el == employee.organization %} selected {% endif %}>
-                                    {{ el }}
-                                </option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="form-size m-2">
-                    <label for="agent" class="form-label">Агент</label>
-                    <input type="text" name="agent" id="agent" class="mb-3 form-control" value="{{ agreement.agent }}">
-                </div>
-                <div class="form-size m-2">
-                    <label for="client" class="form-label">Клиент</label>
-                    <input type="text" name="client" id="client" class="mb-3 form-control" value="{{ agreement.client }}">
-                </div>
-                <div class="form-size m-2">
-                    <label for="country" class="form-label">Страна посещения</label>
-                    <input type="text" value="{{ agreement.country }}" name="country" id="country" class="mb-3 form-control">
-                </div>
-                <div class="form-size m-2">
-                    <label for="number_participants" class="form-label">Количество участников</label>
-                    <input type="text" value="{{ agreement.number_participants }}" name="number_participants" id="number_participants"  class="mb-3 form-control">
-                </div>
-                <div class="w-100"> <h5>Даты поездки:</h5> </div>
-                    <div class="form-size m-2">
-                        <label for="date_start" class="form-label">Начало</label>
-                        <input type="date" name="date_start" id="date_start" class="mb-3 form-control" value="{{ agreement.date_start|date:"Y-m-d" }}">
-                    </div>
-                    <div class="form-size m-2">
-                        <label for="date_end" class="form-label">Окончание</label>
-                        <input type="date" name="date_end" id="date_end" class="mb-3 form-control" value="{{ agreement.date_end|date:"Y-m-d" }}">
-                    </div>
-
-                <div class="w-100"> <h5>Города посещения: </h5> </div>
-                <input type="text" value="{{ agreement.cities }}" name="cities" id="cities" required class="mb-3 form-control">
-
-                <button type="submit" class="btn bg-gradient mt-3 mb-5">Изменить</button>
-            </form>
-        </div>
-    </div> -->
 {% endblock %}

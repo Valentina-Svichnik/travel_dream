@@ -8,7 +8,7 @@ from django.urls import reverse_lazy
 # from .forms import UserRegistrationForm
 
 from .models import Employee, Client, PositionEmployee, Organization, StatusClient, AuthUser, Agreement, Contract
-from .forms import EmployeeCreateForm, ClientCreateForm, AgreementCreateForm, UserCreateForm, AuthUserForm, ContractCreateForm
+from .forms import EmployeeCreateForm, ClientCreateForm, AgreementCreateForm, UserCreateForm, AuthUserForm, ContractCreateForm, PayCreateForm
 
 
 # from django.http import HttpResponse
@@ -31,10 +31,6 @@ def clients(request):
 def agreements(request):
     agreements = Agreement.objects.all()
     return render(request, 'travelers_dream/agreements.html', {'agreements': agreements})
-    
-def pays(request):
-    contract = Contract.objects.all()
-    return render(request, 'travelers_dream/pays.html', {'contract': contract})
 
 def employee(request, id):
     error = ''
@@ -126,6 +122,23 @@ def agreement(request, id):
             error = 'Форма заполнена некорректно'
     organizations = Organization.objects.all()
     return render(request, 'travelers_dream/agreement.html', {'agreement': agreement, 'error': error, 'organizations' : organizations})
+
+def pays(request):
+    contract = Contract.objects.all()
+    return render(request, 'travelers_dream/pays.html', {'contract': contract})
+
+def pay(request, id):
+    error = ''
+    contract = Contract.objects.get(id=id)
+    if request.method == 'POST':
+        form = PayCreateForm(request.POST, instance=contract)
+        if form.is_valid():
+            form.save()
+            return redirect('pays')
+        else:
+            error = 'Форма заполнена некорректно'
+    # organizations = Organization.objects.all()
+    return render(request, 'travelers_dream/pay.html', {'contract': contract, 'error': error})
 
 
 def create_client(request):
